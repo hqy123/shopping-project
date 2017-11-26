@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	    http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+        http://code.alibabatech.com/schema/dubbo 
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+      
+ <!-- 和service相关的配置 --> 
+ <context:component-scan base-package="com.shopping.home.service">
+ </context:component-scan>
+ 
+ <!-- dubbo使用zookeeper发布服务 -->
+ <!-- 指明服务所在的工程 -->
+<dubbo:application name="shopping-home"/>
+ 
+ <!-- 指明注册中心 -->
+ <dubbo:registry protocol="zookeeper" address="10.0.143.55:2181"></dubbo:registry>
+
+ <!-- 把服务暴露在20881端口-->
+<dubbo:protocol name="dubbo" port="20881"></dubbo:protocol>
+
+<dubbo:service interface="com.shopping.home.service.ContentCategoryService" ref="contentCategoryServiceImpl" timeout="6000000">
+</dubbo:service>
+ 
+<dubbo:service interface="com.shopping.home.service.ContentService" ref="contentServiceImpl" timeout="6000000"></dubbo:service>
+</beans>        
+
+
+
+
+
+

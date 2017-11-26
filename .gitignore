@@ -1,0 +1,12 @@
+.metadata/
+.recommenders/
+blog/
+CRM/
+generator/
+mybitas/
+RemoteSystemsTempFiles/
+Servers/
+testShiro/
+*.class
+*/*/test/
+
