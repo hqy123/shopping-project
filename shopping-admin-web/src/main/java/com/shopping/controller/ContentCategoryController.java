@@ -13,12 +13,13 @@ import com.shopping.common.utils.TaotaoResult;
 import com.shopping.home.service.ContentCategoryService;
 
 @Controller
+@RequestMapping("/content/category")
 public class ContentCategoryController {
 	@Autowired
 	private ContentCategoryService contentCategoryService;
 	
 	
-	@RequestMapping("/content/category/list")
+	@RequestMapping("/list")
 	@ResponseBody
 	public List<EasyUITreeNode> findContentCategoryById(@RequestParam(name="id",defaultValue="0")Long parentId)
 	{
@@ -28,7 +29,7 @@ public class ContentCategoryController {
 	}
 	
 	//添加分类
-	@RequestMapping("/content/category/create")
+	@RequestMapping("/create")
 	@ResponseBody
 	public TaotaoResult addContentCategory(Long parentId,String name){
 		

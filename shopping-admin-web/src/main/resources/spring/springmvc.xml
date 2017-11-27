@@ -55,11 +55,10 @@
  <dubbo:reference interface="com.shopping.service.ItemCatService" id="itemCatService"></dubbo:reference>
 
  <dubbo:reference interface="com.shopping.service.ItemParamService" id="itemParamService"></dubbo:reference>
-<!--  
-<dubbo:reference interface="com.shopping.home.service.ContentCategoryService" id="contentCategoryService"></dubbo:reference>
 
-<dubbo:reference interface="com.shopping.home.service.ContentService" id="contentService"></dubbo:reference>-->
-
+ <dubbo:reference interface="com.shopping.home.service.ContentCategoryService" id="contentCategoryService"></dubbo:reference>
+ 
+ <dubbo:reference interface="com.shopping.home.service.ContentService" id="contentService"></dubbo:reference>
 </beans>        
 
 

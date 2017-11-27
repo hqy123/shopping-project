@@ -28,11 +28,11 @@
 <dubbo:protocol name="dubbo" port="20880"></dubbo:protocol>
 
 <!-- 指明服务的接口，和服务的实例 -->
-<dubbo:service interface="com.qiangang.service.ItemService"  ref="itemServiceImpl" timeout="6000000"></dubbo:service>
+<dubbo:service interface="com.shopping.service.ItemService"  ref="itemServiceImpl" timeout="6000000"></dubbo:service>
   
-<dubbo:service interface="com.qiangang.service.ItemCatService" ref="itemCatServiceImpl" timeout="6000000"></dubbo:service>     
+<dubbo:service interface="com.shopping.service.ItemCatService" ref="itemCatServiceImpl" timeout="6000000"></dubbo:service>     
 
-<dubbo:service interface="com.qiangang.service.ItemParamService" ref="itemParamServiceImpl" timeout="6000000"></dubbo:service>
+<dubbo:service interface="com.shopping.service.ItemParamService" ref="itemParamServiceImpl" timeout="6000000"></dubbo:service>
 </beans>        
 
 
