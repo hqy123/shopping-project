@@ -32,23 +32,17 @@
        <property name="prefix" value="/WEB-INF/jsp/"></property>
        <property name="suffix" value=".jsp"></property>
  </bean>
- 
- <!-- 资源映射  
- <mvc:resources location="/WEB-INF/css/" mapping="/css/**"></mvc:resources>
- <mvc:resources location="/WEB-INF/js/" mapping="/js/**"></mvc:resources>
- -->
+
  
  <!-- 调用服务 -->
  <!-- 指明所在的工程 -->
  <dubbo:application name="shopping-search-web"/>
  
- <!-- 指明注册中心-->
+ <!-- 指明注册中心 -->
  <dubbo:registry protocol="zookeeper" address="10.0.143.55:2181"></dubbo:registry>
   
-<!--  -->
-<dubbo:reference interface="com.shopping.home.service.ContentService" id="contentService"></dubbo:reference>
+<dubbo:reference interface="com.shopping.search.service.ImportSolrService" id="importSolrService"></dubbo:reference>
 
-<dubbo:reference interface="com.shopping.home.service.SearchResultService" id="searchResultService"></dubbo:reference>
 </beans>        
 
 

@@ -5,5 +5,7 @@ RemoteSystemsTempFiles/
 Servers/
 *.class
 */*/test/
-*/src/
+*/target/
+*/*/target/
+
 

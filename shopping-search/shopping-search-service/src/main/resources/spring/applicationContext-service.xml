@@ -2,8 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	    http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
         http://www.springframework.org/schema/mvc 
@@ -12,27 +11,25 @@
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context-4.2.xsd">
-      
- <!-- 和service相关的配置 --> 
- <context:component-scan base-package="com.qiangang.search">
- </context:component-scan>
- 
- <!-- dubbo使用zookeeper发布服务 -->
- <!-- 指明服务所在的工程 -->
-<dubbo:application name="qiangang-search"/>
- 
- <!-- 指明注册中心-->
- <dubbo:registry protocol="zookeeper" address="10.0.143.74:2181"></dubbo:registry>
-  
- <!-- 把服务暴露在20880端口 -->
-<dubbo:protocol name="dubbo" port="20885"></dubbo:protocol>
 
-<!-- 指明服务的接口，和服务的实例 -->
-<dubbo:service interface="com.qiangang.search.service.SearchService"  ref="searchServiceImpl" timeout="6000000"></dubbo:service>
-  
-<dubbo:service interface="com.qiangang.search.service.SearchResultService" ref="searchResultServiceImpl" timeout="6000000"></dubbo:service>
+	<!-- 和service相关的配置 -->
+	<context:component-scan base-package="com.shopping.search.service">
+	</context:component-scan>
 
-</beans>        
+	<!-- dubbo使用zookeeper发布服务 -->
+	<!-- 指明服务所在的工程 -->
+	<dubbo:application name="shopping-search" />
+
+	<!-- 指明注册中心 -->
+	<dubbo:registry protocol="zookeeper" address="10.0.143.55:2181"></dubbo:registry>
+
+	<!-- 把服务暴露在20880端口 -->
+	<dubbo:protocol name="dubbo" port="20885"></dubbo:protocol>
+	<!-- 指明服务的接口，和服务的实例 -->
+	<dubbo:service interface="com.shopping.search.service.ImportSolrService"
+		ref="importSolrServiceImpl" timeout="6000000"></dubbo:service>
+</beans>
+ 
 
 
 
