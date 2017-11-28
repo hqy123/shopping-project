@@ -13,7 +13,7 @@
         http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
 	<!-- 和service相关的配置 -->
-	<context:component-scan base-package="com.shopping.search.service">
+	<context:component-scan base-package="com.shopping.search">
 	</context:component-scan>
 
 	<!-- dubbo使用zookeeper发布服务 -->
@@ -28,6 +28,8 @@
 	<!-- 指明服务的接口，和服务的实例 -->
 	<dubbo:service interface="com.shopping.search.service.ImportSolrService"
 		ref="importSolrServiceImpl" timeout="6000000"></dubbo:service>
+	<dubbo:service interface="com.shopping.search.service.SearchResultService"
+		ref="searchResultServiceImpl" timeout="6000000"></dubbo:service>
 </beans>
  
 

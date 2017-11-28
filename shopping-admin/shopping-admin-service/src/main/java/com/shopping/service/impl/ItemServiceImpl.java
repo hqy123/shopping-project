@@ -3,7 +3,16 @@ package com.shopping.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
+import javax.jms.Destination;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.Session;
+import javax.jms.TextMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
@@ -31,7 +40,13 @@ public class ItemServiceImpl implements ItemService {
 	
 	@Autowired
 	private TbItemParamItemMapper itemParamItemMapper;
-
+	
+	@Autowired
+	private JmsTemplate jmsTemplate;
+	
+	@Resource
+	private Destination desTopic;
+	
 	@Override
 	public TbItem findItemById(Long itemId) {
 		//根据商品的id查询商品信息
@@ -79,7 +94,6 @@ public class ItemServiceImpl implements ItemService {
 		//向tb_item表中添加商品信息
 	    itemMapper.insert(item);
 	    
-	    
 	    //向tb_item_desc表中添加商品描述信息
 	    TbItemDesc itemDesc = new TbItemDesc();
 	    itemDesc.setItemId(itemId);
@@ -97,6 +111,14 @@ public class ItemServiceImpl implements ItemService {
 	    itemParamItem.setUpdated(new Date());
 	    
 	    itemParamItemMapper.insert(itemParamItem);
+	    
+	    jmsTemplate.send(desTopic, new MessageCreator() {
+			@Override
+			public Message createMessage(Session session) throws JMSException {
+				TextMessage message = session.createTextMessage(itemId+"");
+				return message;
+			}
+		});
 	    return TaotaoResult.ok();
 	}
 

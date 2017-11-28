@@ -8,4 +8,6 @@ public interface ItemMapper {
 
 	List<SearchItem> getItemInfo();
 
+	SearchItem getItemInfoById(Long id);
+
 }
