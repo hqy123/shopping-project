@@ -121,5 +121,13 @@ public class ItemServiceImpl implements ItemService {
 		});
 	    return TaotaoResult.ok();
 	}
+	@Override
+	public TbItem findItemInfoById(long id) {
+		return itemMapper.selectByPrimaryKey(id);
+	}
+	@Override
+	public TbItemDesc findItemDescInfoById(long id) {
+		return itemDescMapper.selectByPrimaryKey(id);
+	}
 
 }
