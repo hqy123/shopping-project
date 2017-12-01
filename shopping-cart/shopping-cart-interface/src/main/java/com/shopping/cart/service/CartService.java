@@ -9,6 +9,12 @@ public interface CartService {
 
 	TaotaoResult addItemToCart(long itemId, long itemId2, Integer num);
 
-	List<TbItem> showCartItems();
+	TaotaoResult cookieMergeToRedis(Long id, List<TbItem> jsonToList);
+
+	List<TbItem> showCartItems(Long id);
+
+	TaotaoResult updateCartNumber(Long id, long itemId, int itemNum);
+
+	TaotaoResult deleteCartItem(Long id, long itemId);
 
 }

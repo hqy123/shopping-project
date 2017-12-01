@@ -24,10 +24,10 @@
  <!-- 指明注册中心 -->
  <dubbo:registry protocol="zookeeper" address="10.0.143.55:2181"></dubbo:registry>
 
- <!-- 把服务暴露在20881端口
+ <!-- 把服务暴露在20881端口-->
 <dubbo:protocol name="dubbo" port="20889"></dubbo:protocol>
 
-<dubbo:service interface="com.qiangang.cart.service.RedisCartService" ref="redisCartServiceImpl" timeout="6000000"></dubbo:service>-->
+<dubbo:service interface="com.shopping.cart.service.CartService" ref="cartServiceImpl" timeout="6000000"></dubbo:service>
 
 </beans>        
 

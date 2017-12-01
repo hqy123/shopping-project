@@ -50,6 +50,9 @@
  <dubbo:reference interface="com.shopping.service.ItemService" id="itemService"></dubbo:reference>
  
  <dubbo:reference interface="com.shopping.sso.service.TokenService" id="tokenService"></dubbo:reference>
+ 
+  <dubbo:reference interface="com.shopping.cart.service.CartService" id="cartService"></dubbo:reference>
+ 
 </beans>        
 
 

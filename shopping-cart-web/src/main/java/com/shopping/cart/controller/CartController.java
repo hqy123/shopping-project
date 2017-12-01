@@ -1,6 +1,7 @@
 package com.shopping.cart.controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -68,25 +69,56 @@ public class CartController {
 	@RequestMapping("cart/cart")
 	public String showCartItems(HttpServletRequest req,HttpServletResponse res) {
 		TbUser user = (TbUser) req.getAttribute("user");
+		String cookitem = CookieUtils.getCookieValue(req, "cart", true);
+		List<TbItem> cart = JsonUtils.jsonToList(cookitem, TbItem.class);
 		if(user != null) {
-			String item = CookieUtils.getCookieValue(req, "cart", true);
-		
-			List<TbItem> items =cartService.showCartItems();
+			TaotaoResult result = cartService.cookieMergeToRedis(user.getId(),cart);
+			CookieUtils.deleteCookie(req,res,"cart");
+			cart =cartService.showCartItems(user.getId());
 		}
+		req.setAttribute("cartList",cart);
 		
 		return "cart";
 	}
 		
 	
 	@RequestMapping("/cart/update/num/{itemId}/{itemNum}")
-	public TaotaoResult updateCartNumber() {
+	public TaotaoResult updateCartNumber(@PathVariable long itemId,@PathVariable int itemNum,HttpServletRequest req,HttpServletResponse res) {
+		TbUser user = (TbUser) req.getAttribute("user");
+		if(user != null) {
+			TaotaoResult result = cartService.updateCartNumber(user.getId(),itemId,itemNum);
+			return TaotaoResult.ok();
+		}
+		String cookitem = CookieUtils.getCookieValue(req, "cart", true);
+		List<TbItem> cart = JsonUtils.jsonToList(cookitem, TbItem.class);
+		for (TbItem tbItem : cart) {
+			if(tbItem.getId() == itemNum) {
+				tbItem.setNum(itemNum);
+				break;
+			}
+			
+		}
+		CookieUtils.setCookie(req, res, "cart", JsonUtils.objectToJson(cart), CART_COOKIE_TIME, true);
 		
-		
-		return null;
+		return TaotaoResult.ok();
 	}
 	
 	@RequestMapping("/cart/delete/{itemId}")
-	public String deleteCartItem() {
+	public String deleteCartItem(HttpServletRequest req,HttpServletResponse res,@PathVariable long itemId) {
+		TbUser user = (TbUser) req.getAttribute("user");
+		if(user != null) {
+			TaotaoResult result = cartService.deleteCartItem(user.getId(),itemId);
+		}else {
+			String cart = CookieUtils.getCookieValue(req, "cart", true);
+			List<TbItem> items = JsonUtils.jsonToList(cart, TbItem.class);
+			Iterator<TbItem> iterator = items.iterator();
+			while(iterator.hasNext()) {
+				if(iterator.next().getId() == itemId) {
+					iterator.remove();
+					break;
+				}
+			}
+		}
 		
 		return "redirect:/cart/cart.html";
 	}
