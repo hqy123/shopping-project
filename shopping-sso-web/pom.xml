@@ -16,6 +16,11 @@
 			<artifactId>shopping-sso-interface</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>com.shopping</groupId>
+			<artifactId>shopping-cart-interface</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 
 		<!-- Spring -->
 		<dependency>

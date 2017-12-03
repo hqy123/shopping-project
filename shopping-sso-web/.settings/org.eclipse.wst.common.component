@@ -13,6 +13,9 @@
         <dependent-module archiveName="shopping-common-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/shopping-common/shopping-common">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="shopping-cart-interface-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/shopping-cart-interface/shopping-cart-interface">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="shopping-sso-web"/>
         <property name="java-output-path" value="/shopping-sso-web/target/classes"/>
     </wb-module>
